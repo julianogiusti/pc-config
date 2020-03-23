@@ -8,7 +8,7 @@ e também de desenvolvimento.
 - Executar o script [instAll.sh](instAll.sh). ***Se for usar o script, lembre-se de alterar o usuário e email do github***;
 - Personalizar o terminal ([etapa 3](#3-personalizar-terminal-usando-zsh)), assim já instalo o zsh;
 - Copiar conteúdo do arquivo [bashrc_zshrc-config.txt](bashrc_zshrc-config.txt) para .zshrc;
-- Instalar RStudio e Anaconda;
+- Instalar, se/quando preciso: R, RStudio, Anaconda e QGis;
 - Copiar as preferências do Sublime em [Preferences.sublime-settings](Preferences.sublime-settings)
 e importar o arquivo [pycharm-settings.zip](pycharm-settings.zip) no PyCharm.
 
@@ -28,17 +28,16 @@ sudo apt install snapd
 Para instalar alguns softwares, que não vem por .deb nem snap, costumo usar um diretório separado na
 home do usuário, chamado **opt**, de *optional*.
 ```
-cd
-mkdir opt
+cd && mkdir opt
 ```
 
 ### 1. Uso pessoal: Navegador, multimídia, manipulação de imagens, mensagens, etc.
 
 Eu gosto do Firefox, mas, por costume (e alguns detalhes), vamos de Google Chrome de navagador.
 ```
-wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+cd && wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
-rm google-chrome-stable_current_amd64.deb
+cd && rm google-chrome-stable_current_amd64.deb
 ```
 
 Se você marcou para baixar os pacotes de terceiros durante a instalação do Ubuntu, não precisa dessa
@@ -49,10 +48,7 @@ sudo apt install -y ubuntu-restricted-extras
 
 Para ouvir música, Spotify, e para vídeos e CD's(!), VLC.
 ```
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-sudo apt-get update
-sudo apt install -y spotify-client
+snap install spotify
 sudo snap install vlc
 ```
 
@@ -62,7 +58,7 @@ mudar o link, podemos fazer o processo manualmente, baixando em [https://desktop
 cd ~/opt
 wget -c -O telegram.tar.xz https://telegram.org/dl/desktop/linux
 tar -xvJf telegram.tar.xz
-rm telegram.tar.xz
+rm telegram.tar.xz && cd
 
 sudo snap install slack --classic
 sudo snap install skype --classic
@@ -79,9 +75,9 @@ Se der vontade de mais wallpapers e alguns temas.
 ```
 sudo apt install -y "ubuntu-wallpapers ubuntu-wallpapers-*"
 sudo apt install -y "ubuntu-gnome-wallpapers ubuntu-gnome-wallpapers-*"
-sudo apt -y install arc-theme
-sudo apt -y install numix-gtk-theme
-sudo apt -y install numix-icon-theme numix-icon-theme-circle
+sudo apt install -y arc-theme
+sudo apt install -y numix-gtk-theme
+sudo apt install -y numix-icon-theme numix-icon-theme-circle
 ```
 
 Por fim, alguns comandos para dar uma limpada no sistema.
@@ -218,14 +214,14 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key 51F523511C7028C3
 sudo add-apt-repository 'deb     https://qgis.org/ubuntu-ltr bionic main'
 sudo add-apt-repository 'deb-src https://qgis.org/ubuntu-ltr bionic main'
 sudo apt update
-sudo apt install qgis qgis-plugin-grass
+sudo apt install -y qgis qgis-plugin-grass
 ```
 
 ### 3. Personalizar terminal, usando zsh.
 
 Instalar zsh e Oh My Zsh:
 ```
-sudo apt -y install zsh
+sudo apt install -y zsh
 cd && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
@@ -261,6 +257,7 @@ mv *.ttf $HOME/.local/share/fonts
 Baixar o arquivo de configuração de fontes, mover para o diretório de configuração (se não existir:
 mkdir -p \~/.config/fontconfig/conf.d/), limpar e gerar novamente o cache da fontes:
 ```
+cd
 wget -c https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/10-nerd-font-symbols.conf && mv 10-nerd-font-symbols.conf ~/.config/fontconfig/conf.d/
 fc-cache -f -v .local/share/fonts
 ```
@@ -270,10 +267,10 @@ Selecionar a fonte Hack Regular no terminal usado, usando tamanho 11.
 **Obs.**: A fonte Hack do nerd-fonts não estava exibindo os ícones, resolvido ao tentar usar a
 [Awesome-Powerline Fonts](https://github.com/gabrielelana/awesome-terminal-fonts).  
 ```
-git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
+cd && git clone https://github.com/gabrielelana/awesome-terminal-fonts.git
 cd awesome-terminal-fonts
 ./install.sh
-rm awesome-terminal-fonts-master -rf
+cd && rm -rf awesome-terminal-fonts-master
 ```
 
 Alterei o POWERLEVEL9K_MODE no .zshrc de nerdfont-complete para awesome-fontconfig e reiniciei o terminal...
