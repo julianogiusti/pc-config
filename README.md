@@ -26,7 +26,7 @@ sudo apt install snapd
 ```
 
 Para instalar alguns softwares, que não vem por .deb nem snap, costumo usar um diretório separado na
-home do usuário, chamado **opt**, de *optional*.
+home do usuário, chamado **opt**.
 ```
 cd && mkdir opt
 ```
@@ -48,7 +48,7 @@ sudo apt install -y ubuntu-restricted-extras
 
 Para ouvir música, Spotify, e para vídeos e CD's(!), VLC.
 ```
-snap install spotify
+sudo snap install spotify
 sudo snap install vlc
 ```
 
@@ -71,14 +71,26 @@ os snaps.
 alias dfws='df -h | grep -v "snap"'
 ```
 
-Se der vontade de mais wallpapers e alguns temas.
+Se estiver usando GNOME:
 ```
-sudo apt install -y "ubuntu-wallpapers ubuntu-wallpapers-*"
-sudo apt install -y "ubuntu-gnome-wallpapers ubuntu-gnome-wallpapers-*"
-sudo apt install -y arc-theme
-sudo apt install -y numix-gtk-theme
-sudo apt install -y numix-icon-theme numix-icon-theme-circle
+sudo apt install -y gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 ```
+
+Settings > Appearence:
+- Dark
+- Auto-hide = True
+- Icon size = 16
+
+Tweaks > Window Titlebars:
+- Placement = Left
+
+Tweaks > Top Bar:
+- Hot corner = True
+
+Tweaks > Windows:
+- Center new windows = True
 
 Por fim, alguns comandos para dar uma limpada no sistema.
 ```
@@ -249,15 +261,17 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="▶ "
 Instalar a fonte Hack, baixando a versão mais recente em:
 - [https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
-Extrair os arquivos .ttf e mover para \~/.local/share/fonts (se não existir: mkdir -p \~/.local/share/fonts):
+Extrair os arquivos .ttf e mover para \~/.local/share/fonts:
 ```
+cd
+mkdir -p ~/.local/share/fonts
 mv *.ttf $HOME/.local/share/fonts
 ```
 
-Baixar o arquivo de configuração de fontes, mover para o diretório de configuração (se não existir:
-mkdir -p \~/.config/fontconfig/conf.d/), limpar e gerar novamente o cache da fontes:
+Baixar o arquivo de configuração de fontes, mover para o diretório de configuração, limpar e gerar novamente o cache da fontes:
 ```
 cd
+mkdir -p /.config/fontconfig/conf.d
 wget -c https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/10-nerd-font-symbols.conf && mv 10-nerd-font-symbols.conf ~/.config/fontconfig/conf.d/
 fc-cache -f -v .local/share/fonts
 ```

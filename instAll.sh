@@ -11,6 +11,10 @@ cd && mkdir opt
 
 # 1. Uso pessoal: Navegador, multimídia, manipulação de imagens, mensagens, etc.
 
+sudo apt install -y gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+
 wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
@@ -43,7 +47,7 @@ sudo snap install pycharm-community --classic
 
 curl https://pyenv.run | bash
 
-sudo apt-get install -y \
+sudo apt install -y \
   make \
   build-essential \
   libssl-dev \
