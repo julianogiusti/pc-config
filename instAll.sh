@@ -1,75 +1,42 @@
 #!/bin/bash
 
-# Antes de tudo
+cd && mkdir opt
 
 sudo apt update
 sudo apt upgrade -y
 
-sudo apt install snapd
+sudo apt install -y snapd
 
-cd && mkdir opt
+sudo apt install -y vim htop curl git ssh sshfs gdebi yakuake terminator blueman
 
-# 1. Uso pessoal: Navegador, multimídia, manipulação de imagens, mensagens, etc.
+sudo apt install -y zsh
+cd && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-sudo apt install -y gnome-tweak-tool chrome-gnome-shell gnome-shell-extensions
-gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
+# zsh plugins
+sudo apt install -y fzf
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin
+
+cp .zshrc ~/.zshrc
+source ~/.zshrc
+
+sudo apt install -y ubuntu-restricted-extras
+
+# apps
 
 wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-sudo apt install -y ubuntu-restricted-extras
-
-sudo snap install spotify
-sudo snap install vlc
-
-cd ~/opt
-wget -c -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-tar -xvJf telegram.tar.xz
-rm telegram.tar.xz
-
-sudo snap install slack --classic
-sudo snap install skype --classic
-
-# 2. Desenvolvimento e outros utilitários
-
-sudo apt install -y vim htop curl git ssh sshfs
-
-git config --global user.name "Juliano Giusti"
-git config --global user.email giustijuliano@gmail.com
-
-ssh-keygen -t rsa -C "giustijuliano@gmail.com" -b 4096
-
 sudo snap install sublime-text --classic
-sudo snap install pycharm-community --classic
-# sudo snap install code --classic
+sudo snap install libreoffice okular pdfarranger
 
-curl https://pyenv.run | bash
+# gnome settings
 
-sudo apt install -y \
-  make \
-  build-essential \
-  libssl-dev \
-  zlib1g-dev \
-  libbz2-dev \
-  libreadline-dev \
-  libsqlite3-dev \
-  wget \
-  curl \
-  llvm \
-  libncurses5-dev \
-  libncursesw5-dev \
-  xz-utils \
-  tk-dev \
-  libffi-dev \
-  liblzma-dev \
-  python-openssl \
-  git
-
-exec $SHELL
+sudo apt install -y gnome-tweaks chrome-gnome-shell gnome-shell-extensions
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 
 sudo apt clean
 sudo apt autoremove --purge
-
-sudo reboot
