@@ -1,0 +1,10 @@
+[user]
+	name = Juliano Giusti
+	email = giustijuliano@gmail.com
+
+[alias]
+	co = checkout
+	cp = cherry-pick
+	ci = commit
+	st = status
+	br = branch

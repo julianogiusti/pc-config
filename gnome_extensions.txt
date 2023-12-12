@@ -1,0 +1,3 @@
+Gerenciar clipboard: https://extensions.gnome.org/extension/5278/pano/pano@elhan.io
+Mudar workspace pelo painel do GNOME: https://extensions.gnome.org/extension/6523/panel-workspace-scroll/
+Numlock & Capslock status: https://extensions.gnome.org/extension/36/lock-keys/
