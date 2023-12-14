@@ -56,5 +56,10 @@ sudo apt-get update
 
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
 sudo apt clean
 sudo apt autoremove --purge
