@@ -1,0 +1,10 @@
+df -h | { read -r line; echo "$line"; sort -k 1; }
+ls -lh /var/log
+
+tail -f /var/log/syslog
+
+
+bash
+sudo tee /var/log/syslog </dev/null
+
+sudo find /var/log -type f -name "*.gz" -delete
